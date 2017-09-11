@@ -39,12 +39,56 @@ Student Attendance Tracking
 	<div class = "row">
 		<div class="col-sm-4"></div>
 		<div class="col-sm-4">
-      		<div class="panel-group">
-    			<div class="panel panel-info">
-      				<div class="panel-heading"><a href = "#">Course - II</a></div>
-      				<div class="panel-body"><img src="books.jpg" alt="course-2" style="width:304px;height:228px;"></div>
+      		<form action = "instructor_view_page.jsp" method = "post">
+    		<div class = "jumbotron">
+    			
+    			<div class="form-group">
+      				<label class="col-sm-4" for="inputPassword1">Course: </label>
+      				<div class="col-sm-8">
+						<select name=courseName class="form-control">
+    						<option value="c1">course-1</option>
+   	 						<option value="c2">course-2</option>
+    						<option value="c3">course-3</option>
+						</select>
+      				</div>
+   			 	</div><br><br>
+   			 	<div class="form-group">
+      				<label class="col-sm-4" for="inputPassword1">CRN: </label>
+      				<div class="col-sm-8">
+						<select name=crn class="form-control">
+    						<option value="crn1">CRN-1</option>
+   	 						<option value="crn2">CRN-2</option>
+    						<option value="crn3">CRN-3</option>
+						</select>
+      				</div>
+   			 	</div><br><br>
+   			 	<div class="form-group">
+      				<label class="col-sm-4" for="inputPassword1">Student: </label>
+      				<div class="col-sm-8">
+						<select name=student class="form-control">
+    						<option value="s1">student-1</option>
+   	 						<option value="s2">student-2</option>
+    						<option value="s3">student-3</option>
+						</select>
+      				</div>
+   			 	</div><br><br>
+   			 	<div class="form-group">
+      				<label class="col-sm-4" for="inputPassword1">Date: </label>
+      				<div class="col-sm-8">
+						<select name=courseName class="form-control">
+    						<option value="d1">date-1</option>
+   	 						<option value="d2">date-2</option>
+    						<option value="d3">date-3</option>
+						</select>
+      				</div>
+   			 	</div><br><br>							
+    			
+    			<div class = "row">
+    			<div class = "col-sm-4"></div>
+    			<div class = "col-sm-4"><input type="submit" class="btn btn-primary" value = "submit" name = "submit"></div>
     			</div>
-    		</div>
+  			</div>
+  		</form>
 		</div>
 	</div>
 </div>
