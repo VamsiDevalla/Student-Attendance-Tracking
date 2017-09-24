@@ -1,0 +1,12 @@
+{
+    "name": "StudentAttendanceTracking",
+    "version": "0.0.1",
+    "description": "Website for an instructor to Manage Student Attendance. Profissor can check the Attendance percentage of the Student or can even manually mark/unmark Attendance for a particula student. The core functionality of this application is generation of a 'QR code', which can be scanned by a student from an IOS device  to mark attendance for a particular subject",
+    "main": "test.js",
+    "dependencies": {
+        "express": "latest",
+        "body-parser": "latest",
+        "parse": "latest"
+    },
+    "author": "Vamsi Devalla"
+}
