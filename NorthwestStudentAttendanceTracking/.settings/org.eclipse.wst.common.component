@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="NorthwestStudentAttendanceTracking">
+        <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <dependent-module archiveName="spring-jms-4.0.0.RELEASE.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/SpringRs005Resource/lib/spring4/spring/spring-jms-4.0.0.RELEASE.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="spring-aop-4.0.0.RELEASE.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/SpringRs005Resource/lib/spring4/spring/spring-aop-4.0.0.RELEASE.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="spring-web-4.0.0.RELEASE.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/SpringRs005Resource/lib/spring4/spring/spring-web-4.0.0.RELEASE.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="spring-messaging-4.0.0.RELEASE.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/SpringRs005Resource/lib/spring4/spring/spring-messaging-4.0.0.RELEASE.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="commons-logging-1.1.1.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/SpringRs005Resource/lib/spring4/logger/commons-logging-1.1.1.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="spring-beans-4.0.0.RELEASE.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/SpringRs005Resource/lib/spring4/spring/spring-beans-4.0.0.RELEASE.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="spring-instrument-4.0.0.RELEASE.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/SpringRs005Resource/lib/spring4/spring/spring-instrument-4.0.0.RELEASE.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="spring-core-4.0.0.RELEASE.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/SpringRs005Resource/lib/spring4/spring/spring-core-4.0.0.RELEASE.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="jackson-annotations-2.4.0.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/SpringRs005Resource/lib/spring4/jackson_json/jackson-annotations-2.4.0.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="spring-test-4.0.0.RELEASE.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/SpringRs005Resource/lib/spring4/spring/spring-test-4.0.0.RELEASE.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="spring-webmvc-portlet-4.0.0.RELEASE.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/SpringRs005Resource/lib/spring4/spring/spring-webmvc-portlet-4.0.0.RELEASE.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="spring-context-support-4.0.0.RELEASE.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/SpringRs005Resource/lib/spring4/spring/spring-context-support-4.0.0.RELEASE.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="spring-framework-bom-4.0.0.RELEASE.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/SpringRs005Resource/lib/spring4/spring/spring-framework-bom-4.0.0.RELEASE.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="spring-websocket-4.0.0.RELEASE.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/SpringRs005Resource/lib/spring4/spring/spring-websocket-4.0.0.RELEASE.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="spring-instrument-tomcat-4.0.0.RELEASE.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/SpringRs005Resource/lib/spring4/spring/spring-instrument-tomcat-4.0.0.RELEASE.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="spring-orm-4.0.0.RELEASE.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/SpringRs005Resource/lib/spring4/spring/spring-orm-4.0.0.RELEASE.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="jackson-core-2.4.0.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/SpringRs005Resource/lib/spring4/jackson_json/jackson-core-2.4.0.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="spring-context-4.0.0.RELEASE.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/SpringRs005Resource/lib/spring4/spring/spring-context-4.0.0.RELEASE.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="jackson-databind-2.4.0.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/SpringRs005Resource/lib/spring4/jackson_json/jackson-databind-2.4.0.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="spring-tx-4.0.0.RELEASE.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/SpringRs005Resource/lib/spring4/spring/spring-tx-4.0.0.RELEASE.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="spring-expression-4.0.0.RELEASE.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/SpringRs005Resource/lib/spring4/spring/spring-expression-4.0.0.RELEASE.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="spring-oxm-4.0.0.RELEASE.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/SpringRs005Resource/lib/spring4/spring/spring-oxm-4.0.0.RELEASE.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="spring-aspects-4.0.0.RELEASE.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/SpringRs005Resource/lib/spring4/spring/spring-aspects-4.0.0.RELEASE.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="spring-jdbc-4.0.0.RELEASE.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/SpringRs005Resource/lib/spring4/spring/spring-jdbc-4.0.0.RELEASE.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="spring-webmvc-4.0.0.RELEASE.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/SpringRs005Resource/lib/spring4/spring/spring-webmvc-4.0.0.RELEASE.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <property name="java-output-path" value="/NorthwestStudentAttendanceTracking/build/classes"/>
+        <property name="context-root" value="NorthwestStudentAttendanceTracking"/>
+    </wb-module>
+</project-modules>

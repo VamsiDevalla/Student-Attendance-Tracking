@@ -1,0 +1,140 @@
+<!Doctype html>
+<html>
+<head>
+
+<title>
+StudentAttendanceTracking
+</title>
+
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  
+  <link rel="stylesheet" href="css/student.css">
+  
+  <script src="js/accounts.js"></script>
+  <script src="js/home.js"></script>
+  
+  <meta http-equiv="cache-control" content="max-age=0" />
+  <meta http-equiv="cache-control" content="no-cache" />
+  <meta http-equiv="expires" content="0" />
+  <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+  <meta http-equiv="pragma" content="no-cache" />
+</head>
+ 
+<script>
+$(document).ready(function(){
+	
+	$.ajaxSetup({ cache: false });
+	navigateToLogin();
+	
+});//document
+
+function navigateToLogin(){
+	$.get("login.html", function(data, status){
+		$("#contentId").html(data);
+		$("#alertId").hide();
+		$("#loginId").click(function(){
+			submitLogin();
+		});//loginbutton
+	});//get
+}
+
+
+function navigateToRegister(){
+	$.get("register.html", function(data, status){
+		$("#contentId").html(data);
+		$("#registerId").click(function(){
+			submitRegistration();
+		});//registerbutton
+	});//get
+}
+
+function submitLogin(){
+	var formData =  ConvertFormToJSON("#formId");
+	$.ajax({
+		 type: "POST",
+		 contentType: "application/json",
+		 url: "logins.action",
+		 data: JSON.stringify(formData),
+		 dataType: 'json',
+		 success: function(x){ 
+			//alert(x.result);
+			if(x.result=="Login Successful"){
+				navigateToHomePage();
+			}//if
+			else{
+				alert(x.failedReason);
+			}//else
+		 }//function
+		 
+		});//ajax
+}//submitLogin
+
+function navigateToHomePage(){
+	$.get("home.html", function(data, status){
+		$("#bodyId").html(data);
+		initializeHome();
+   });//get
+}//navigateToHomePage
+
+function submitRegistration(){
+	var formData =  ConvertFormToJSON("#formId");
+	$.ajax({
+		 type: "POST",
+		 contentType: "application/json",
+		 url: "register.action",
+		 data: JSON.stringify(formData),
+		 dataType: 'json',
+		 success: function(x){ 
+			if(x.result=="Registration Successful"){
+				navigateToLoginPage();		
+			}//if
+			else{
+				alert(x.failedReason);
+			}//else
+		 }//function
+		 
+		});//ajax
+}//submitRegistration
+
+function navigateToLoginPage(){
+	$.get("login.html", function(data, status){
+		$("#contentId").html(data);
+		$("#alertId").show();
+   });//get
+
+}
+function ConvertFormToJSON(formId){
+	   var array = $(formId).serializeArray();
+	   var json = {};
+	   
+	   jQuery.each(array, function() {
+	       json[this.name] = this.value || '';
+	   });
+	   
+	   return json;
+	}
+
+</script>
+
+
+<body id = "bodyId">
+<div class = "well" style= "background-color: Bisque;">
+	<div class = "container text-center">
+		<h1>Student Attendance Tracking</h1>
+	</div>	
+</div>
+
+<div class = "container-fluid" id = "contentId">
+	
+</div>
+</body>
+</html>
+	
+
+	
