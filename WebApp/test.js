@@ -1,7 +1,6 @@
 var Parse = require('parse/node');
 var express = require("express");
 var app = express(); 
-var http = require('http').Server(app);
 var appId = "HxaUEjDqH5kQDlygLZfTP1meqZ9d9T89kiF9C1wB";
 var javakey = "apfmv9o37gTwYMbYXI5xQMrZGIQjuqagOLsdSzEy";
 Parse.initialize(appId, javakey);
@@ -22,7 +21,7 @@ app.get("/",function(req,res){
   
 });
 
-http.listen(8081, function () {
+app.listen(8081, function () {
   console.log('App listening on http://127.0.0.1:8081/');
 });
 
