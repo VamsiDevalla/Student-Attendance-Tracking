@@ -6,6 +6,7 @@
 StudentAttendanceTracking
 </title>
 
+<!-- BootStrap Code -->
 <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
@@ -14,8 +15,10 @@ StudentAttendanceTracking
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   
+  <!-- css file -->
   <link rel="stylesheet" href="css/student.css">
   
+  <!-- javascript files -->
   <script src="js/accounts.js"></script>
   <script src="js/home.js"></script>
   
@@ -29,11 +32,13 @@ StudentAttendanceTracking
 <script>
 $(document).ready(function(){
 	
+	//code for not having errors while reloading a page.
 	$.ajaxSetup({ cache: false });
 	navigateToLogin();
 	
 });//document
 
+//JQuery function for navigating page to login.
 function navigateToLogin(){
 	$.get("login.html", function(data, status){
 		$("#contentId").html(data);
@@ -42,9 +47,9 @@ function navigateToLogin(){
 			submitLogin();
 		});//loginbutton
 	});//get
-}
+}//navigateToLogin
 
-
+//JQuery function for navigating page to register.
 function navigateToRegister(){
 	$.get("register.html", function(data, status){
 		$("#contentId").html(data);
@@ -52,8 +57,9 @@ function navigateToRegister(){
 			submitRegistration();
 		});//registerbutton
 	});//get
-}
+}//navigateToRegister
 
+//function for loginbutton when login button was clicked.
 function submitLogin(){
 	var formData =  ConvertFormToJSON("#formId");
 	$.ajax({
@@ -75,6 +81,7 @@ function submitLogin(){
 		});//ajax
 }//submitLogin
 
+//function if a login attempt was successful.
 function navigateToHomePage(){
 	$.get("home.html", function(data, status){
 		$("#bodyId").html(data);
@@ -82,6 +89,7 @@ function navigateToHomePage(){
    });//get
 }//navigateToHomePage
 
+//function for signup button when a register button was clicked.
 function submitRegistration(){
 	var formData =  ConvertFormToJSON("#formId");
 	$.ajax({
@@ -102,6 +110,7 @@ function submitRegistration(){
 		});//ajax
 }//submitRegistration
 
+//function for displaying alert messages in login page.
 function navigateToLoginPage(){
 	$.get("login.html", function(data, status){
 		$("#contentId").html(data);
@@ -109,6 +118,8 @@ function navigateToLoginPage(){
    });//get
 
 }
+
+//function for Converting the data to JSON 
 function ConvertFormToJSON(formId){
 	   var array = $(formId).serializeArray();
 	   var json = {};
