@@ -1,0 +1,44 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "A30B84378F6CDAE6A7EB79C84CCD6E7ECA4FE8A8+++BC4C145",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "A30B84378F6CDAE6A7EB79C84CCD6E7ECA4FE8A8+++590DEE3" : 9223372036854775807,
+    "A30B84378F6CDAE6A7EB79C84CCD6E7ECA4FE8A8+++C34BC88" : 9223372036854775807,
+    "A30B84378F6CDAE6A7EB79C84CCD6E7ECA4FE8A8+++BC4C145" : 9223372036854775807,
+    "A30B84378F6CDAE6A7EB79C84CCD6E7ECA4FE8A8+++ECDB0FD" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "FE38B4D3-FFC4-4C59-8308-909ECB48C623",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "A30B84378F6CDAE6A7EB79C84CCD6E7ECA4FE8A8+++590DEE3" : "..\/SwapNShop\/sns",
+    "A30B84378F6CDAE6A7EB79C84CCD6E7ECA4FE8A8+++C34BC88" : "sns\/",
+    "A30B84378F6CDAE6A7EB79C84CCD6E7ECA4FE8A8+++BC4C145" : "sns1\/",
+    "A30B84378F6CDAE6A7EB79C84CCD6E7ECA4FE8A8+++ECDB0FD" : "..\/SwapNShop\/sns"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "SwapNShop",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "SwapNShop.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/bitbucket.org\/TeamDevallaIosProject\/sns.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "A30B84378F6CDAE6A7EB79C84CCD6E7ECA4FE8A8+++590DEE3"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/bitbucket.org\/TeamDevallaIosProject\/sns.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "A30B84378F6CDAE6A7EB79C84CCD6E7ECA4FE8A8+++BC4C145"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/bitbucket.org\/TeamDevallaIosProject\/sns.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "A30B84378F6CDAE6A7EB79C84CCD6E7ECA4FE8A8+++C34BC88"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/bitbucket.org\/TeamDevallaIosProject\/sns.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "A30B84378F6CDAE6A7EB79C84CCD6E7ECA4FE8A8+++ECDB0FD"
+    }
+  ]
+}
