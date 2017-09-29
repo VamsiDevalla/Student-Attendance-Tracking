@@ -1,0 +1,69 @@
+<% include header %>
+<% include navBar %>
+
+<div class = "container-fluid">
+<div class = "row">
+	<div class = "col-sm-4">
+	</div>
+		
+	<div class = "col-sm-4">
+	<h4>Instructor Details</h4>
+		<form action = "\courseView\edit" method = "post">
+    		<div class = "jumbotron">
+    		
+    			<div class="form-group">
+      				<label for="email1">Instructor ID: <%= courses.id%></label>
+    			</div><br>
+    			
+    			<div class="form-group">
+    				<label for="pwd1">Instructor Name: <%= courses.name%></label>
+    			</div><br>
+    			
+    			<div class="form-group">
+    				<label for="pwd1">Course Name: <%= courses.title%></label>
+    			</div><br>
+    			
+    			<div class="form-group">
+    				<label for="pwd1">CRN Number: <%= courses.CRN%></label>
+    			</div><br>
+    			<div class = "row">
+    			<div class = "col-sm-4"></div>
+    			<div class = "col-sm-4"><input type="submit" class="btn btn-info" value = "Edit" name = "edit"></div>
+    			</div>
+    			
+  			</div>
+  		</form>
+ 	 </div>
+</div>
+
+<table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Student Name</th>
+        <th>Attendance Percentage</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+    <form action = "student_details.html" method = "post">
+      <tr>
+        <td>Sai</td>
+        <td>50%</td>
+        <td><input type="submit" class="btn btn-primary" value = "View" name = "view"></td>
+      </tr>
+      <tr>
+        <td>Vamsi</td>
+        <td>75%</td>
+        <td><input type="submit" class="btn btn-primary" value = "View" name = "view"></td>
+      </tr>
+      <tr>
+        <td>Rohith</td>
+        <td>100%</td>
+        <td><input type="submit" class="btn btn-primary" value = "View" name = "view"></td>
+      </tr>
+      </form>
+    </tbody>
+  </table>
+</div>
+
+<% include footer %>
