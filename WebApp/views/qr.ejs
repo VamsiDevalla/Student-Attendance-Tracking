@@ -1,0 +1,40 @@
+<% include header %>
+<% include navBar %>
+
+<input id="text" type="Number" 
+            value=2 style="Width:20%"/> 
+            <select id="ram" value="CRN">
+                <option value="GDP">GDP-44-33555</option>
+                <option value="NS">NS-44-44555</option>
+                <option value="Java">Java-44-66666</option>
+                <option value="WebApps">WebApps-44-66666</option>
+            </select>
+            <button onclick="generateBarCode()">Generate BarCode</button>
+        <div>
+      <img id='barcode' 
+            src="https://api.qrserver.com/v1/create-qr-code/?data=HelloWorld&amp;size=100x100" 
+            alt="" 
+            title="HELLO" 
+            width="200" 
+            height="200" />
+           
+          
+      </div>
+          
+   <script type="text/javascript">
+        var n=$("input[type='number']").val();
+        function generateBarCode(){
+            console.log(n);
+        for(var i=0;i<n;i++){
+            var nric = $('#text').val();
+            var st="";
+            var one = $('#example-square').val();
+            st += nric + one;
+                var run = $('#ram').val();
+                var url = 'https://api.qrserver.com/v1/create-qr-code/?data=' + st + run + '&amp;size=50x50';
+                $('#barcode').attr('src', url); 
+        }
+        }
+        </script>
+
+<% include footer %>
