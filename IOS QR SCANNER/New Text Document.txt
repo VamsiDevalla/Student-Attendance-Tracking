@@ -1,4 +1,4 @@
 1)The process for ios developing ios QR scanner is very clear given explained here(https://www.appcoda.com/barcode-reader-swift/).
 2)The stater layout for the project can be found in QRCodeReaderStarter.zip.
-2)The complete solution can be clone from this github repo (https://github.com/appcoda/QRCodeReader.git).
+3)The complete solution can be clone from this github repo (https://github.com/appcoda/QRCodeReader.git).
 
