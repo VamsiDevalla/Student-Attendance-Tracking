@@ -1,0 +1,24 @@
+<% include header %>
+<% include navBar %>
+
+<div class = "container">
+    <h2 class="text-center">Select Course</h2>
+	<div class = "row">
+  <% if (courses.length) { %>
+    <% courses.forEach(function(entry) { %>
+    <div class="col-sm-4">
+      <div class="panel-group">
+        <div class="panel panel-info">
+          <div class="panel-heading"><a href = "\students\<%= entry.CRN %>"><%= entry.CRN %></a></div>
+          <div class="panel-body"><img src="pics\<%= entry.title %>.jpeg" alt="Course-1" style="width:304px;height:228px;"></div>
+          <div class="panel-footer"><%= entry.title %></a></div>
+        </div>
+      </div>
+    </div>
+    <% }) %>
+  <% } %>	
+		
+	</div>
+</div>
+
+<% include footer %>
