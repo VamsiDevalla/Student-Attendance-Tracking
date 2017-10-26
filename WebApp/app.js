@@ -11,12 +11,10 @@ var javakey = "PBJqn5rA4MbrYR7cFZXeQjqUbFBX7ZYu9zRmgAeW";
 Parse.initialize(appId, javakey);
 Parse.serverURL = 'https://parseapi.back4app.com';
 
-var localUser="";
-var userSId="";
-var instructorName="";
- var menuItems = [];
- 
- 
+var sess;
+var menuItems = [];
+var session = require('express-session');
+app.use(session({secret: 'ssshhhhh'}));
 app.use(logger("dev"));
 
 app.set("views", path.resolve(__dirname, "views"));
@@ -26,13 +24,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 app.get("/", function(req, res) {
+  sess = req.session;
   menuItems = [];
   res.render("index",{entries : menuItems});
 });
 
 app.get("/welcome", function(req, res) {
+  sess = req.session;
   menuItems = [];
-  if(localUser===""){
+  if(!sess.user){
     res.render("logout");
    
   }
@@ -42,9 +42,10 @@ app.get("/welcome", function(req, res) {
 });
 
 app.get("/courses", function(req, res) {
+  sess = req.session;
  menuItems = [{name:"Add Course",route:"addCourse"},{name:"Remove Course",route:"removeCourse"}];
  var cours = [];
-  if(localUser===""){
+  if(!sess.user){
     res.render("logout");
    
   }
@@ -53,7 +54,7 @@ app.get("/courses", function(req, res) {
   query.find({
     success: function(results) {
       results.forEach(function(result){
-        if(result.get("professorId")=== userSId){
+        if(result.get("professorId")=== sess.user){
           var crn = result.get("CRN");
           var courseName = result.get("CourseName");
           cours.push({CRN:crn,title: courseName}) ;
@@ -68,10 +69,10 @@ app.get("/courses", function(req, res) {
 
 
 app.get("/courses/:num", function(req, res) {
-  
+  sess = req.session;
   menuItems = [{name:"Mark Attendance",route:"markAttendance"},{name:"View Attendance",route:"viewAttendance"}];
   var cours = {};
-  if(localUser===""){
+  if(!sess.user){
 
    res.render("logout");
   }
@@ -84,8 +85,8 @@ app.get("/courses/:num", function(req, res) {
           var courseName = result.get("CourseName");
           cours.CRN=result.get("CRN");
           cours.title= courseName;
-          cours.id=userSId;
-          cours.name=instructorName;
+          cours.id=sess.user;
+          cours.name=sess.name;
           
         }
 
@@ -101,9 +102,9 @@ app.get("/courses/:num", function(req, res) {
 
 
 app.get("/addCourse", function(req, res) {  
-
+  sess = req.session;
   menuItems = [];
-  if(localUser===""){
+  if(!sess.user){
 
    res.render("logout");
   }
@@ -113,8 +114,9 @@ app.get("/addCourse", function(req, res) {
 });
 
 app.post("/addCourse/", function(req, res) {
+  sess = req.session;
  menuItems = [];
-  if(localUser===""){
+  if(!sess.user){
 
    res.render("logout");
   }
@@ -124,7 +126,7 @@ courses.set("departmentId", "fKr8WsSVpm");
  courses.set("CRN",req.body.crn );
  courses.set("CourseName", req.body.subject);
  courses.set("CourseDescription",req.body.des );
- courses.set("professorId", userSId);
+ courses.set("professorId", sess.user);
  courses.save();
   
     res.redirect("/courses");
@@ -133,9 +135,9 @@ courses.set("departmentId", "fKr8WsSVpm");
 });
 
 app.get("/removeCourse", function(req, res) {  
-
+sess = req.session;
   menuItems = [];
-  if(localUser===""){
+  if(!sess.user){
 
    res.render("logout");
   }
@@ -146,7 +148,7 @@ app.get("/removeCourse", function(req, res) {
   query.find({
     success: function(results) {
       results.forEach(function(result){
-        if(result.get("professorId")=== userSId){
+        if(result.get("professorId")=== sess.user){
           var crn = result.get("CRN");
           var courseName = result.get("CourseName");
           cours.push({CRN:crn,title: courseName}) ;
@@ -161,7 +163,8 @@ app.get("/removeCourse", function(req, res) {
 });
 
 app.post("/removeCourse/", function(req, res) {
-  if(localUser===""){
+  sess = req.session;
+  if(!sess.user){
 
    res.render("logout");
   }
@@ -170,7 +173,7 @@ app.post("/removeCourse/", function(req, res) {
  var crn = subject[1];
  var title = subject[0];
  var courses = new Parse.Query("Courses");
- courses.equalTo('professorId', userSId);
+ courses.equalTo('professorId', sess.user);
  courses.equalTo('CRN', crn);
  console.log(courses);
  courses.equalTo('CourseName', title);
@@ -189,9 +192,10 @@ courses.find().then(function(results) {
 
 
 app.get("/students", function(req, res) {
+  sess = req.session;
  menuItems = [];
  var cours = [];
-  if(localUser===""){
+  if(!sess.user){
     res.render("logout");
    
   }
@@ -200,7 +204,7 @@ app.get("/students", function(req, res) {
   query.find({
     success: function(results) {
       results.forEach(function(result){
-        if(result.get("professorId")=== userSId){
+        if(result.get("professorId")=== sess.user){
           var crn = result.get("CRN");
           var courseName = result.get("CourseName");
           cours.push({CRN:crn,title: courseName}) ;
@@ -214,9 +218,10 @@ app.get("/students", function(req, res) {
 });
 
 app.get("/students/:crn", function(req, res) {
+  sess = req.session;
  menuItems = [];
  
-  if(localUser===""){
+  if(!sess.user){
     res.render("logout");   
   }
   else{
@@ -256,7 +261,8 @@ app.get("/students/:crn", function(req, res) {
 
 
 app.get("/qr", function(req, res) {
-  if(localUser===""){
+  sess = req.session;
+  if(!sess.user){
 
    res.render("logout");
   }
@@ -267,7 +273,7 @@ app.get("/qr", function(req, res) {
   query.find({
     success: function(results) {
       results.forEach(function(result){
-        if(result.get("professorId")=== userSId){
+        if(result.get("professorId")=== sess.user){
           var crn = result.get("CRN");
           var courseName = result.get("CourseName");
           cours.push({CRN:crn,title: courseName}) ;
@@ -286,10 +292,13 @@ app.get("/qr", function(req, res) {
 
 
 app.get("/logout", function(req, res) {
-  localUser="";
-  userSId="";
-  instructorName="";
-  res.render("logout");
+   req.session.destroy(function(err) {
+    if(err) {
+      console.log(err);
+    } else {
+      res.render("logout");
+    }
+  });
 });
 
 
@@ -297,6 +306,7 @@ app.get("/logout", function(req, res) {
 
 
 app.post("/",function(req,res){
+  sess = req.session;
 	var myname=req.body.userId;
     var mypass= req.body.pwd;
 	if (!myname || !mypass) {
@@ -307,10 +317,9 @@ app.post("/",function(req,res){
     else{
     	 Parse.User.logIn(myname, mypass, {
       success: function(user) {
-        localUser=user.id;
-        userSId=user.get("ID");
-        instructorName=user.get("username");
-      	res.redirect("/welcome");
+       sess.user=user.get("ID");
+        sess.name=user.get("username");
+        res.redirect("/welcome");
          
       },
       error: function(user, error) {
