@@ -113,7 +113,7 @@ app.get("/addCourse", function(req, res) {
 }
 });
 
-app.post("/addCourse/", function(req, res) {
+app.post("/addCourse", function(req, res) {
   sess = req.session;
  menuItems = [];
   if(!sess.user){
@@ -162,7 +162,7 @@ sess = req.session;
 }
 });
 
-app.post("/removeCourse/", function(req, res) {
+app.post("/removeCourse", function(req, res) {
   sess = req.session;
   if(!sess.user){
 
