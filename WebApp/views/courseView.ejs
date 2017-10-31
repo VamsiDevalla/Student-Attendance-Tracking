@@ -40,19 +40,21 @@
     <thead>
       <tr>
         <th>Student Name</th>
+        <th>sid</th>
         <th>Attendance Percentage</th>
-        <th></th>
       </tr>
     </thead>
     
     <tbody>
-    <form action = "student_details.html" method = "post">
-      <tr>
-        <td>Sai</td>
-        <td>50%</td>
-        <td><input type="submit" class="btn btn-primary" value = "View" name = "view"></td>
-      </tr>
-    </form>
+      <% if (stud.length) { %>
+            <% stud.forEach(function(entry) { %>
+              <tr>
+              <td><%= entry.name %></td>
+              <td><%= entry.id %></td>
+              <td><%= entry.att %></td>
+            </tr>
+            <% }) %>
+        <% } %>
     </tbody>
   
   </table>

@@ -1,56 +1,42 @@
 <% include header %>
 <% include navBar %>
-
-
-
 <div class = "container-fluid">
-<div class = "row">
+  <div class = "row">
     <div class = "col-sm-3">
-    </div>
-        
-    <div class = "col-sm-6"> 
+    </div>    
+    <div class = "col-sm-6">   
       <div class = "jumbotron">
-        <div class="form-group">
-        <label>CRN:</label>
-        <select id="ram" value="CRN" class="form-control">
-             <% if (courses.length) { %>
-            <% courses.forEach(function(entry) { %>
-            <option value="<%= entry.title %>-<%= entry.CRN %>"><%= entry.title %>-<%= entry.CRN %></option>
-            <% }) %>
-          <% } %> 
-        </select>
- </div>
-      <div class="form-group">
-            <label>Ramdom Code:</label>
-               <input id="text"  class="form-control" type="Number"/> 
-               
+        <form action="/qr" method="post">
+          <div class="form-group">
+            <label>CRN:</label>
+            <select id="ram" value="CRN" name='course' class="form-control">
+              <% if (courses.length) { %>
+                <% courses.forEach(function(entry) { %>
+                  <option value="<%= entry.title %>-<%= entry.CRN %>" ><%= entry.title %>-<%= entry.CRN %></option>
+                <% }) %>
+              <% } %> 
+            </select>
           </div>
-      
-<button onclick="randomCode()" class="btn btn-info">Generate Random Code</button>
+          <div class="form-group">
+            <label>Ramdom Code:</label>
+            <input id="text"  class="form-control" type="Number" name='ramdom'/>    
+          </div>        
+          <button type="button" onclick="randomCode()" class="btn btn-info">Generate Random Code</button>   
+          <button type="button" onclick="generateBarCode()" class="btn btn-primary">Generate QR Code</button>
           
- <button onclick="generateBarCode()" class="btn btn-primary">Generate QR Code</button> 
- <button   class="btn btn-danger"> Submit for attendance</button>
-
-
-<br>
-
-            
-<div id="qrImage">
-  <img id='barcode'  src="https://api.qrserver.com/v1/create-qr-code/?data=HelloWorld&amp;size=100x100"  alt="" title="HELLO" width="200" height="200" class="img-responsive center-block"/>          
-</div>
-
-
-                
-            </div>
-        
-     </div>
-        
+          <br>           
+          <div id="qrImage">
+            <img id='barcode' src="https://api.qrserver.com/v1/create-qr-code/?data=HelloWorld&amp;size=100x100" alt="" title="HELLO" width="200" height="200" class="img-responsive center-block"/>       
+          </div> 
+          
+          <input type="hidden" id="uri"  class="form-control" type="text" name='uri'/>    
+          
+          <button type="submit" class="btn btn-danger"> Submit for attendance</button>
+        </form>                 
+      </div>  
+    </div>     
     <div class = "col-sm-3">
     </div>
-
+  </div>
 </div>
-</div>
-
-
-
 <% include footer %>
