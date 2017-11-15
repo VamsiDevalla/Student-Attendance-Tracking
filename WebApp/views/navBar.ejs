@@ -4,7 +4,7 @@
 			<li><a href="\welcome">Home</a></li>
 			<% if (entries.length) { %>
  				<% entries.forEach(function(entry) { %>
- 				<li><a href="\<%= entry.route %>"><%= entry.name %></a></li>
+ 				<li><a href="/<%= entry.route %>"><%= entry.name %></a></li>
  				<% }) %>
 			<% } %>
 		</ul>
