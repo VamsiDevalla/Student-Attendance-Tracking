@@ -71,7 +71,9 @@ app.get("/courses/:crn/:count", function(req, res) {
         results.forEach(function(result){
           if(result.get("CRN") === req.params.crn){
             var courseName = result.get("CourseName");
+            var regestrationStatus = result.get("regestrationsOpen");
             cours.CRN=result.get("CRN");
+            cours.status = regestrationStatus;
             cours.title= courseName;
             cours.id=sess.user;
             cours.name=sess.name;     
@@ -115,6 +117,134 @@ app.get("/courses/:crn/:count", function(req, res) {
   }
 });
 
+app.get("/courseView/regestrationStatus/:CRN",function(req,res){
+  console.log("entered");
+  sess = req.session;
+  if(!sess.user){
+    res.redirect("logout");
+  }
+  else{
+    var courses = new Parse.Query("Courses");
+   courses.find({
+      success: function(results) {
+        results.forEach(function(result){
+          if(result.get("CRN") === req.params.CRN){
+            console.log("found some results");
+            var status = result.get("regestrationsOpen");
+            if(status === "OPEN"){
+              result.set("regestrationsOpen", "CLOSED");
+              result.save();
+            }
+            else{
+              result.set("regestrationsOpen", "OPEN");
+              result.save();
+            }    
+          }
+        });
+        res.redirect("/welcome");
+      }
+    });
+  }
+});
+
+app.get("/courseView/attEdit/:sid/:crn", function(req,res){
+  sess = req.session;
+  menuItems = [];
+  var attendance = [];
+  if(!sess.user){
+    res.redirect("logout");
+  }
+  else{
+    var att = new Parse.Query("Attendance");
+    att.find({
+      success: function(results) {
+        results.forEach(function(result){
+          if(result.get("CRN") === req.params.crn && result.get("SID") === req.params.sid){
+            var date = result.get("createdAt");
+            var status = result.get("Status");
+            var id = result.id;
+            var attend;
+            if(status){
+              attend = "Present";
+            }
+            else{
+              attend = "Absent";
+            }
+            attendance.push({date: date, status:attend, objId: id});    
+          }
+        });
+        res.render("attendanceEdit",{entries: menuItems,att: attendance});
+      }
+    });
+  }
+});
+
+app.get("/attendanceChange/:id", function(req,res){
+  sess = req.session;
+  var sid;
+  var crn;
+  if(!sess.user){
+    res.redirect("logout");
+  }
+  else{
+    var att = new Parse.Query("Attendance");
+    att.find({
+      success: function(results) {
+        results.forEach(function(result){
+          if(result.id === req.params.id){
+            var status = result.get("Status");
+            sid = result.get("SID");
+            crn = result.get("CRN");
+            result.set("Status",!status);
+            result.save();
+            var reg = new Parse.Query("regestries");
+            reg.find({
+              success: function(results) {
+                results.forEach(function(result){
+                  if(result.get("CRN") === crn && result.get("studentId") === sid){
+                    var count  = result.get("lacturesAttended");
+                    if(!status){
+                      result.set("lacturesAttended", parseInt(count)+1);
+                      result.save();
+                    } 
+                    else{
+                      result.set("lacturesAttended", parseInt(count)-1);
+                      result.save();
+                    } 
+                  }
+                });
+               }   
+            });
+          }
+        });
+        res.redirect("/courseView/attEdit/"+sid+"/"+crn);
+      }
+    });
+  }
+});
+
+app.get("/courseView/remove/:sid/:crn", function(req,res){
+  sess = req.session;
+  menuItems = [];
+  var attendance = [];
+  if(!sess.user){
+    res.redirect("logout");
+  }
+  else{
+    var reg = new Parse.Query("regestries");
+    reg.find({
+      success: function(results) {
+        results.forEach(function(result){
+          if(result.get("CRN") === req.params.crn && result.get("studentId") === req.params.sid){
+            result.destroy();  
+          }
+        });
+        res.redirect("/welcome");
+      }
+    });
+  }
+});
+
 app.get("/addCourse", function(req, res) {  
   sess = req.session;
   menuItems = [];
@@ -139,8 +269,10 @@ app.post("/addCourse", function(req, res) {
    courses.set("CourseName", req.body.subject);
    courses.set("CourseDescription",req.body.des );
    courses.set("professorId", sess.user);
+   courses.set("lectureCount", 0);
+   courses.set("regestrationsOpen", "OPEN");
    courses.save();
-   res.redirect("/courses");   
+   res.redirect("/welcome");   
   }
 });
 
@@ -157,7 +289,7 @@ app.get("/removeCourse", function(req, res) {
     query.find({
       success: function(results) {
         results.forEach(function(result){
-          if(result.get("professorId")=== userSId){
+          if(result.get("professorId")=== sess.user){
             var crn = result.get("CRN");
             var courseName = result.get("CourseName");
             cours.push({CRN:crn,title: courseName}) ;
@@ -185,12 +317,14 @@ app.post("/removeCourse", function(req, res) {
     courses.find().then(function(results) {
         return Parse.Object.destroyAll(results);
     }).then(function() {
-      res.redirect("/courses");
+      res.redirect("/welcome");
     }, function(error) {
       alert("something went wrong");
     });     
   }
 });
+
+
 
 app.get("/qr", function(req, res) {
   sess = req.session;
@@ -225,23 +359,43 @@ app.post("/qr",function(req,res){
     var course = req.body.course;
     var ramdom = req.body.ramdom;
     var uri = req.body.uri;
+    var students = [];
     var courses = new Parse.Query("Courses");
     courses.find({
       success: function(results) {
         results.forEach(function(result){
           if(result.get("CRN") === course.split("-")[1]){
             var count = result.get("lectureCount");
-            // var update = new Parse.Object("Courses");
             result.set("lectureCount",parseInt(count)+1);
             result.save(); 
           }
         }); 
+        var reg = new Parse.Query("regestries");
+        reg.find({
+          success: function(results) {
+            results.forEach(function(result){
+              if(result.get("CRN") === course.split("-")[1]){
+                students.push(result.get("studentId"));
+              }
+            });
+            if(students.length){
+             students.forEach(function(student){
+                var attend =  new Parse.Object("Attendance");
+                attend.set("SID", student);
+                attend.set("CRN", course.split("-")[1]);
+                attend.set("Status", false);
+                attend.set("QR", ""+ramdom+course);
+                attend.save();
+             });
+            }
+          }   
+        });
         var qr = new Parse.Object("QRCode");
-        qr.set("QR", ""+ramdom+course);
-        qr.set("uri", uri);
-        qr.save();
-        open(uri);
-        res.redirect("qr");
+          qr.set("QR", ""+ramdom+course);
+          qr.set("uri", uri);
+          qr.save();
+          open(uri);
+          res.redirect("qr");
       }
     });
   }
