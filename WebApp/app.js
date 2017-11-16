@@ -55,7 +55,7 @@ app.get("/welcome", function(req, res) {
 
 app.get("/courses/:crn/:count", function(req, res) {
   sess = req.session;
-  menuItems = [{name:"Mark Attendance",route:"markAttendance"},{name:"View Attendance",route:"viewAttendance"}];
+  menuItems = [];
   if(!sess.user){
     res.redirect("logout");
   }
