@@ -1,0 +1,86 @@
+<% include header %>
+<% include navBar %>
+
+<div class = "container">
+   <form class="well form-horizontal">
+  <fieldset>
+
+  <!-- Form Name -->
+  <legend><center><h2><b>Account Details</b></h2></center></legend><br>
+
+  <!-- Text input-->
+
+  <div class="form-group">
+    <label class="col-md-4 control-label">First Name</label>  
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+    <input  name="first_name" value="<%= user.fname%>" class="form-control"  type="text" disabled>
+      </div>
+    </div>
+  </div>
+
+  <!-- Text input-->
+
+  <div class="form-group">
+    <label class="col-md-4 control-label" >Last Name</label> 
+      <div class="col-md-4 inputGroupContainer">
+      <div class="input-group">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+    <input name="last_name" value="<%= user.lname%>" class="form-control"  type="text" disabled>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-md-4 control-label" >ID</label> 
+      <div class="col-md-4 inputGroupContainer">
+      <div class="input-group">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-paperclip"></i></span>
+    <input name="college_id" value="<%= user.ID%>" class="form-control"  type="text" disabled>
+      </div>
+    </div>
+  </div>
+    
+  <!-- Text input-->
+
+  <div class="form-group">
+    <label class="col-md-4 control-label">Username</label>  
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+    <input  name="user_name" value="<%= user.uname%>" class="form-control"  type="text" disabled>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Text input-->
+         <div class="form-group">
+    <label class="col-md-4 control-label">E-Mail</label>  
+      <div class="col-md-4 inputGroupContainer">
+      <div class="input-group">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+    <input name="email" value="<%= user.email %>" class="form-control"  type="text" disabled>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Text input-->
+         
+  <div class="form-group">
+    <label class="col-md-4 control-label">Contact No.</label>  
+      <div class="col-md-4 inputGroupContainer">
+      <div class="input-group">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+    <input name="contact_no" value="<%= user.phone%>" class="form-control" type="number" disabled>
+      </div>
+    </div>
+  </div>
+
+  </fieldset>
+  </form>
+ </div>
+
+<% include footer %>
