@@ -434,6 +434,32 @@ app.post("/",function(req,res){
   } 
 });
 
+app.get("/signup",function(req,res){
+  res.render("signup");
+});
+
+app.post("/signup",function(req,res){
+  var user = new Parse.User();
+  user.set("username", req.body.user_name);
+  user.set("password", req.body.user_password);
+  user.set("email", req.body.email);
+  user.set("ID", req.body.college_id);
+  user.set("userType", "Professor");
+  user.set("firstName", req.body.first_name);
+  user.set("lastName", req.body.last_name);
+  user.set("contactNum",parseInt(req.body.contact_no));
+  user.signUp(null, {
+    success: function(result) {
+      //Hooray! Let them use the app now.
+      res.redirect("/");   
+    },
+    error: function(user, error) {
+      // Show the error message somewhere and let the user try again.
+      alert("Error: " + error.code + " " + error.message);
+    }
+  });
+});
+
 app.use(function(req, res) {
   res.status(404).render("404");
 });
