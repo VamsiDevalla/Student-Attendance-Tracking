@@ -401,6 +401,36 @@ app.post("/qr",function(req,res){
   }
 });
 
+app.get("/myAccount",function(req, res) {
+   sess = req.session;
+   menuItems = [];
+   acc={};
+  if(!sess.user){
+    res.redirect("logout");
+  }
+  else{
+    var user = new Parse.Query(Parse.User);
+    user.equalTo("objectId", sess.auth);
+    user.find({
+      success: function(results) {
+        results.forEach(function(result){
+          acc["fname"] = result.get("firstName");
+          acc["lname"] = result.get("lastName");
+          acc["ID"] = result.get("ID");
+          acc["uname"] = result.get("username");
+          acc["email"] = result.get("email1");
+          acc["phone"] = result.get("contactNum");
+        });
+        res.render("myAccount",{entries : menuItems,user: acc});
+      },
+      error: function(error) {
+        alert("Error: " + error.code + " " + error.message);
+      }
+    });
+    
+  }
+});
+
 app.get("/logout", function(req, res) {
   req.session.destroy(function(err) {
     if(err) {
@@ -424,6 +454,8 @@ app.post("/",function(req,res){
       success: function(user) {
         sess.user=user.get("ID");
         sess.name=user.get("username");
+        sess.auth = user.id;
+        
         res.redirect("/welcome");
       },
       error: function(user, error) {
@@ -448,6 +480,7 @@ app.post("/signup",function(req,res){
   user.set("firstName", req.body.first_name);
   user.set("lastName", req.body.last_name);
   user.set("contactNum",parseInt(req.body.contact_no));
+  user.set("email1", req.body.email);
   user.signUp(null, {
     success: function(result) {
       //Hooray! Let them use the app now.
