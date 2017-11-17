@@ -55,7 +55,7 @@ app.get("/welcome", function(req, res) {
 
 app.get("/courses/:crn/:count", function(req, res) {
   sess = req.session;
-  menuItems = [{name:"Mark Attendance",route:"markAttendance"},{name:"View Attendance",route:"viewAttendance"}];
+  menuItems = [];
   if(!sess.user){
     res.redirect("logout");
   }
@@ -401,6 +401,36 @@ app.post("/qr",function(req,res){
   }
 });
 
+app.get("/myAccount",function(req, res) {
+   sess = req.session;
+   menuItems = [];
+   acc={};
+  if(!sess.user){
+    res.redirect("logout");
+  }
+  else{
+    var user = new Parse.Query(Parse.User);
+    user.equalTo("objectId", sess.auth);
+    user.find({
+      success: function(results) {
+        results.forEach(function(result){
+          acc["fname"] = result.get("firstName");
+          acc["lname"] = result.get("lastName");
+          acc["ID"] = result.get("ID");
+          acc["uname"] = result.get("username");
+          acc["email"] = result.get("email1");
+          acc["phone"] = result.get("contactNum");
+        });
+        res.render("myAccount",{entries : menuItems,user: acc});
+      },
+      error: function(error) {
+        alert("Error: " + error.code + " " + error.message);
+      }
+    });
+    
+  }
+});
+
 app.get("/logout", function(req, res) {
   req.session.destroy(function(err) {
     if(err) {
@@ -424,6 +454,8 @@ app.post("/",function(req,res){
       success: function(user) {
         sess.user=user.get("ID");
         sess.name=user.get("username");
+        sess.auth = user.id;
+        
         res.redirect("/welcome");
       },
       error: function(user, error) {
@@ -432,6 +464,33 @@ app.post("/",function(req,res){
       }
     });
   } 
+});
+
+app.get("/signup",function(req,res){
+  res.render("signup");
+});
+
+app.post("/signup",function(req,res){
+  var user = new Parse.User();
+  user.set("username", req.body.user_name);
+  user.set("password", req.body.user_password);
+  user.set("email", req.body.email);
+  user.set("ID", req.body.college_id);
+  user.set("userType", "Professor");
+  user.set("firstName", req.body.first_name);
+  user.set("lastName", req.body.last_name);
+  user.set("contactNum",parseInt(req.body.contact_no));
+  user.set("email1", req.body.email);
+  user.signUp(null, {
+    success: function(result) {
+      //Hooray! Let them use the app now.
+      res.redirect("/");   
+    },
+    error: function(user, error) {
+      // Show the error message somewhere and let the user try again.
+      alert("Error: " + error.code + " " + error.message);
+    }
+  });
 });
 
 app.use(function(req, res) {

@@ -2,39 +2,41 @@
 <% include navBar %>
 
 <div class = "container-fluid">
-<div class = "row">
-  <div class = "col-sm-4">
-  </div>
-    
-  <div class = "col-sm-4">
-  <h4>Instructor Details</h4>
-    <form action = "/courseView/edit" method = "post">
-        <div class = "jumbotron">
-        
-          <div class="form-group">
-              <label for="email1">Instructor ID: <%= courses.id%></label>
-          </div><br>
-          
-          <div class="form-group">
-            <label for="pwd1">Instructor Name: <%= courses.name%></label>
-          </div><br>
-          
-          <div class="form-group">
-            <label for="pwd1">Course Name: <%= courses.title%></label>
-          </div><br>
-          
-          <div class="form-group">
-            <label for="pwd1">CRN Number: <%= courses.CRN%></label>
-          </div><br>
+  <form class="well form-horizontal">
+  <fieldset>
 
-          <div class="form-group">
-            <label for="pwd1"> Regestrations: <%= courses.status %>  </label>
-            <a class="btn btn-danger" href="/courseView/regestrationStatus/<%= courses.CRN %>">CHANGE</a>
-          </div><br>
-        </div>
-      </form>
-   </div>
-</div>
+  <!-- Form Name -->
+  <legend><center><h4><b>Course Details</b></h4></center></legend><br>
+
+
+    <label class="col-md-2 col-sm-6 control-label">Course Name: </label>  
+    <div class="col-md-2 col-sm-6 inputGroupContainer">
+    <div class="input-group">
+    
+     <input  name="course_title"  class="form-control"  type="text" value="<%= courses.title%>" disabled>
+      </div>
+    </div>
+
+    <label class="col-md-2 col-sm-6 control-label">CRN Number: </label>  
+    <div class="col-md-2 col-sm-6 inputGroupContainer">
+    <div class="input-group">
+    
+     <input  name="course_crn"  class="form-control"  type="text" value="<%= courses.CRN%>" disabled>
+      </div>
+    </div>
+
+    <label class="col-md-2 col-sm-6 control-label">Regestrations:  </label>  
+    <div class="col-md-2 col-sm-6 inputGroupContainer">
+    <div class="input-group">
+     <input  name="course_title"  class="form-control"  type="text" value="<%= courses.status %> " disabled>
+      <a class="btn btn-danger" href="/courseView/regestrationStatus/<%= courses.CRN %>">CHANGE</a>
+      </div>
+
+    </div>
+   </fieldset>
+  </form>
+  
+
 
 <table class="table table-bordered">
     <thead>
