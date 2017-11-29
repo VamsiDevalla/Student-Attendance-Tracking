@@ -1,5 +1,6 @@
 var Parse = require('parse/node');
 var path = require("path");
+var flash = require("connect-flash");
 var express = require("express");
 var app = express(); 
 var session = require('express-session');
@@ -15,6 +16,7 @@ Parse.serverURL = 'https://parseapi.back4app.com';
 app.use( express.static( "public" ) );
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(logger("dev"));
+app.use(flash());
 app.use(session({
   secret: 'ssshhhhh',
   resave: false,
@@ -25,6 +27,12 @@ app.set("view engine", "ejs");
 
 var menuItems = [];
 var sess;
+
+app.use(function(req,res,next()){
+  res.local.error = req.flash("error");
+  res.local.success = req.flash("success");
+  next();
+});
 
 app.get("/", function(req, res) {
   sess = req.session;
@@ -501,6 +509,6 @@ app.use(function(req, res) {
   res.status(404).render("404");
 });
 
-http.listen(8081, function () {
-  console.log('App listening on http://127.0.0.1:8081/');
+app.listen(process.env.PORT,process.env.IP, function(){
+    console.log("yelp camp app started");
 });
