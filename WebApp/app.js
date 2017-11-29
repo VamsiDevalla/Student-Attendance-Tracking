@@ -28,9 +28,9 @@ app.set("view engine", "ejs");
 var menuItems = [];
 var sess;
 
-app.use(function(req,res,next()){
-  res.local.error = req.flash("error");
-  res.local.success = req.flash("success");
+app.use(function(req,res,next){
+  res.locals.error = req.flash("error");
+  res.locals.success = req.flash("success");
   next();
 });
 
@@ -45,6 +45,7 @@ app.get("/welcome", function(req, res) {
   menuItems = [{name:"Add Course",route:"addCourse"},{name:"Remove Course",route:"removeCourse"}];
   var cours = [];
   if(!sess.user){
+    req.flash("error","you are not logged in or your session expired. login to continue.");
     res.redirect("logout");
   }
   else{
@@ -69,6 +70,7 @@ app.get("/courses/:crn/:count", function(req, res) {
   sess = req.session;
   menuItems = [];
   if(!sess.user){
+    req.flash("error","you are not logged in or your session expired. login to continue.");
     res.redirect("logout");
   }
   else{
@@ -130,9 +132,9 @@ app.get("/courses/:crn/:count", function(req, res) {
 });
 
 app.get("/courseView/regestrationStatus/:CRN",function(req,res){
-  console.log("entered");
   sess = req.session;
   if(!sess.user){
+    req.flash("error","you are not logged in or your session expired. login to continue.");
     res.redirect("logout");
   }
   else{
@@ -164,6 +166,7 @@ app.get("/courseView/attEdit/:sid/:crn", function(req,res){
   menuItems = [];
   var attendance = [];
   if(!sess.user){
+    req.flash("error","you are not logged in or your session expired. login to continue.");
     res.redirect("logout");
   }
   else{
@@ -196,6 +199,7 @@ app.get("/attendanceChange/:id", function(req,res){
   var sid;
   var crn;
   if(!sess.user){
+    req.flash("error","you are not logged in or your session expired. login to continue.");
     res.redirect("logout");
   }
   else{
@@ -240,6 +244,7 @@ app.get("/courseView/remove/:sid/:crn", function(req,res){
   menuItems = [];
   var attendance = [];
   if(!sess.user){
+    req.flash("error","you are not logged in or your session expired. login to continue.");
     res.redirect("logout");
   }
   else{
@@ -261,6 +266,7 @@ app.get("/addCourse", function(req, res) {
   sess = req.session;
   menuItems = [];
   if(!sess.user){
+    req.flash("error","you are not logged in or your session expired. login to continue.");
     res.redirect("logout");
   }
   else{
@@ -268,10 +274,11 @@ app.get("/addCourse", function(req, res) {
   }
 });
 
-app.post("/addCourse", function(req, res) {
+app.post("/addCourse",addCourseValidation, function(req, res) {
   sess = req.session;
   menuItems = [];
   if(!sess.user){
+    req.flash("error","you are not logged in or your session expired. login to continue.");
     res.redirect("logout");
   }
   else{
@@ -284,6 +291,7 @@ app.post("/addCourse", function(req, res) {
    courses.set("lectureCount", 0);
    courses.set("regestrationsOpen", "OPEN");
    courses.save();
+   req.flash("success","successfully added course.");
    res.redirect("/welcome");   
   }
 });
@@ -292,6 +300,7 @@ app.get("/removeCourse", function(req, res) {
   sess = req.session;
   menuItems = [];
   if(!sess.user){
+    req.flash("error","you are not logged in or your session expired. login to continue.");
     res.redirect("logout");
   }
   else{
@@ -313,9 +322,11 @@ app.get("/removeCourse", function(req, res) {
   }
 });
 
+
 app.post("/removeCourse", function(req, res) {
   sess = req.session;
   if(!sess.user){
+    req.flash("error","you are not logged in or your session expired. login to continue.");
     res.redirect("logout");
   }
   else{
@@ -329,18 +340,19 @@ app.post("/removeCourse", function(req, res) {
     courses.find().then(function(results) {
         return Parse.Object.destroyAll(results);
     }).then(function() {
+      req.flash("success","successfully removed course.");
       res.redirect("/welcome");
     }, function(error) {
-      alert("something went wrong");
+      req.flash("error","something went wrong.");
+      res.redirect("back");
     });     
   }
 });
 
-
-
 app.get("/qr", function(req, res) {
   sess = req.session;
   if(!sess.user){
+    req.flash("error","you are not logged in or your session expired. login to continue.");
     res.redirect("logout");
   }
   else{
@@ -365,6 +377,7 @@ app.get("/qr", function(req, res) {
 app.post("/qr",function(req,res){
   sess = req.session;
   if(!sess.user){
+    req.flash("error","you are not logged in or your session expired. login to continue.");
     res.redirect("logout");
   }
   else{
@@ -407,6 +420,7 @@ app.post("/qr",function(req,res){
           qr.set("uri", uri);
           qr.save();
           open(uri);
+          req.flash("success","QR is generated and opened in new tab.");
           res.redirect("qr");
       }
     });
@@ -418,6 +432,7 @@ app.get("/myAccount",function(req, res) {
    menuItems = [];
    acc={};
   if(!sess.user){
+    req.flash("error","you are not logged in or your session expired. login to continue.");
     res.redirect("logout");
   }
   else{
@@ -446,9 +461,10 @@ app.get("/myAccount",function(req, res) {
 app.get("/logout", function(req, res) {
   req.session.destroy(function(err) {
     if(err) {
-      console.log(err);
+      req.flash("error","something went wrong while loging out...sorry!!!");
+      res.redirect("back");
     } else {
-      res.render("logout");
+      res.render("logout",{success:"successfully logged out"});
     }
   });
 });
@@ -467,12 +483,12 @@ app.post("/",function(req,res){
         sess.user=user.get("ID");
         sess.name=user.get("username");
         sess.auth = user.id;
-        
+        req.flash("success","login success");
         res.redirect("/welcome");
       },
       error: function(user, error) {
-        console.log("fail");
-        res.send("Failed to connect with back4app");
+        req.flash("error","username or password or both are invalid");
+        res.redirect("back");
       }
     });
   } 
@@ -482,7 +498,7 @@ app.get("/signup",function(req,res){
   res.render("signup");
 });
 
-app.post("/signup",function(req,res){
+app.post("/signup",signupValidation,function(req,res){
   var user = new Parse.User();
   user.set("username", req.body.user_name);
   user.set("password", req.body.user_password);
@@ -496,19 +512,61 @@ app.post("/signup",function(req,res){
   user.signUp(null, {
     success: function(result) {
       //Hooray! Let them use the app now.
+      req.flash("success","successfully signed up...explore our application");
       res.redirect("/");   
     },
     error: function(user, error) {
       // Show the error message somewhere and let the user try again.
-      alert("Error: " + error.code + " " + error.message);
+      req.flash("error",error.code + " : " + error.message);
+      res.redirect("back");
     }
   });
 });
+
+function signupValidation(req,res,next){
+  if(req.body.user_name != null && req.body.user_password != null && req.body.user_password != null && req.body.confirm_password != null && req.body.email != null && req.body.college_id != null 
+    && req.body.first_name != null && req.body.last_name != null && req.body.contact_no != null){
+    if(req.body.user_name.length<5 || req.body.user_name.length >10){
+      req.flash("error","username should contain 5 to 10 letters");
+      return res.redirect("back");
+    }else if(req.body.user_password.length<5 || req.body.user_password.length>10){
+      req.flash("error","password should contain 5 to 10 charectors");
+      return res.redirect("back");
+    }else if(req.body.college_id.length != 7){
+      req.flash("error","ID should contain exactly 7 charecters");
+      return res.redirect("back");
+    }else if(req.body.contact_no.length != 10){
+      req.flash("error","phone number should contain 10 letters");
+      return res.redirect("back");
+    }else{
+      next();
+    }
+  }else if(req.body.user_password != req.body.confirm_password){
+    req.flash("error","passwords did not matched");
+    return res.redirect("back");
+  }else{
+    req.flash("error","All fields are manditory");
+    return res.redirect("back");
+  }
+}
+
+function addCourseValidation(req,res,next){
+  if(req.body.crn.length != 5){
+    req.flash("error","CRN should be 5 digit number");
+    return res.redirect("back");  
+  }else if(req.body.des == null || req.body.des.length < 100){
+    req.flash("error","Description should have a of length 100 charecters");
+    return res.redirect("back");  
+  }
+  else{
+    next();
+  }
+}
 
 app.use(function(req, res) {
   res.status(404).render("404");
 });
 
-app.listen(process.env.PORT,process.env.IP, function(){
-    console.log("yelp camp app started");
+app.listen(process.env.PORT || 8081,process.env.IP, function(){
+    console.log("Student attendance app is started");
 });

@@ -6,7 +6,11 @@
 	</div>
 		
 	<div class = "col-sm-4">
-	
+	   <% if(error && error.length>0){ %>
+        <div class="alert alert-danger" role="alert"> <%= error %></div>
+      <% } else if(success && success.length>0){ %>
+        <div class="alert alert-success" role="alert"> <%= success %></div>
+      <% } %>
 		
     		<div class = "jumbotron">
   				<p style="font-size:100%;">You are Logged out. <a href = "/">click here</a> to Login</p>

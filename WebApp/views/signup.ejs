@@ -6,6 +6,12 @@
   <fieldset>
 
   <!-- Form Name -->
+     <% if(error && error.length>0){ %>
+        <div class="alert alert-danger" role="alert"> <%= error %></div>
+      <% } else if(success && success.length>0){ %>
+        <div class="alert alert-success" role="alert"> <%= success %></div>
+      <% } %>
+
   <legend><center><h2><b>Registration Form</b></h2></center></legend><br>
 
   <!-- Text input-->
@@ -84,7 +90,7 @@
       <div class="col-md-4 inputGroupContainer">
       <div class="input-group">
           <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-    <input name="email" placeholder="E-Mail Address" class="form-control"  type="text">
+    <input name="email" placeholder="E-Mail Address" class="form-control"  type="email">
       </div>
     </div>
   </div>

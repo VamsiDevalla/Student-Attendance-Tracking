@@ -19,10 +19,15 @@
           </div>
           <div class="form-group">
             <label>Ramdom Code:</label>
-            <input id="text"  class="form-control" type="Number" name='ramdom'/>    
-          </div>        
-          <button type="button" onclick="randomCode()" class="btn btn-info">Generate Random Code</button>   
-          <button type="button" onclick="generateBarCode()" class="btn btn-primary">Generate QR Code</button>
+            <div class="input-group">
+              <input id="text"  class="form-control" type="Number" name='ramdom' disabled/> 
+              <span class="input-group-addon">
+                <a onclick="randomCode()" class="btn btn-xs btn-info">Generate</a> 
+              </span>
+            </div> 
+          </div>   
+
+          <button style="align:center;text-align:center;" type="button" onclick="generateBarCode()" class="btn btn-primary">Generate QR Code</button>
           
           <br>           
           <div id="qrImage">
