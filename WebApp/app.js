@@ -15,7 +15,11 @@ Parse.serverURL = 'https://parseapi.back4app.com';
 app.use( express.static( "public" ) );
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(logger("dev"));
-app.use(session({secret: 'ssshhhhh'}));
+app.use(session({
+  secret: 'ssshhhhh',
+  resave: false,
+  saveUninitialized: false
+}));
 app.set("views", path.resolve(__dirname, "views"));
 app.set("view engine", "ejs");
 
