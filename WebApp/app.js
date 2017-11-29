@@ -274,7 +274,7 @@ app.get("/addCourse", function(req, res) {
   }
 });
 
-app.post("/addCourse",addCourseValidation, function(req, res) {
+app.post("/addCourse",addCourseValidation,uniqueCrnValidation, function(req, res) {
   sess = req.session;
   menuItems = [];
   if(!sess.user){
@@ -291,7 +291,7 @@ app.post("/addCourse",addCourseValidation, function(req, res) {
    courses.set("lectureCount", 0);
    courses.set("regestrationsOpen", "OPEN");
    courses.save();
-   req.flash("success","successfully added course.");
+   req.flash("success","successfully added course.If the course doesn't reflect try to reload the page");
    res.redirect("/welcome");   
   }
 });
@@ -554,13 +554,32 @@ function addCourseValidation(req,res,next){
   if(req.body.crn.length != 5){
     req.flash("error","CRN should be 5 digit number");
     return res.redirect("back");  
-  }else if(req.body.des == null || req.body.des.length < 100){
+  }else if(req.body.des == null || req.body.des.length < 30){
     req.flash("error","Description should have a of length 100 charecters");
     return res.redirect("back");  
   }
   else{
     next();
   }
+}
+
+function uniqueCrnValidation(req,res,next){
+  var query = new Parse.Query("Courses");
+  var flag=0;
+    query.find({
+      success: function(results) {
+        results.forEach(function(result){
+          if(result.get("CRN")=== req.body.crn){
+            req.flash("error","This CRN alrdy exits. Give some other crn");
+            flag =1;
+            return res.redirect("back");  
+          }
+        });
+        if(flag==0){
+          next();
+        }
+      }
+    }); 
 }
 
 app.use(function(req, res) {
