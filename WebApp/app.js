@@ -1,12 +1,11 @@
-var Parse = require('parse/node');
-var path = require("path");
-var flash = require("connect-flash");
+var Parse = require('parse/node'),
+    path = require("path"),
+    flash = require("connect-flash");
 var express = require("express");
 var app = express(); 
 var session = require('express-session');
 var logger = require("morgan");
 var bodyParser = require("body-parser");
-var open = require('open');
 var http = require('http').Server(app);
 var appId = "4N5weJdvcHqi3tc1o0ciQjs7s0O2ezOkFmXwQi4h";
 var javakey = "PBJqn5rA4MbrYR7cFZXeQjqUbFBX7ZYu9zRmgAeW";
@@ -419,7 +418,9 @@ app.post("/qr",function(req,res){
           qr.set("QR", ""+ramdom+course);
           qr.set("uri", uri);
           qr.save();
-          open(uri);
+          // open(uri);
+          // opn(uri);
+          // window.open(uri,'_blank');
           req.flash("success","QR is generated and opened in new tab.");
           res.redirect("qr");
       }
@@ -526,11 +527,11 @@ app.post("/signup",signupValidation,function(req,res){
 function signupValidation(req,res,next){
   if(req.body.user_name != null && req.body.user_password != null && req.body.user_password != null && req.body.confirm_password != null && req.body.email != null && req.body.college_id != null 
     && req.body.first_name != null && req.body.last_name != null && req.body.contact_no != null){
-    if(req.body.user_name.length<5 || req.body.user_name.length >10){
+    if(req.body.user_name.length<5 || req.body.user_name.length >20){
       req.flash("error","username should contain 5 to 10 letters");
       return res.redirect("back");
-    }else if(req.body.user_password.length<5 || req.body.user_password.length>10){
-      req.flash("error","password should contain 5 to 10 charectors");
+    }else if(req.body.user_password.length<5 || req.body.user_password.length>20){
+      req.flash("error","password should contain 5 to 20 charectors");
       return res.redirect("back");
     }else if(req.body.college_id.length != 7){
       req.flash("error","ID should contain exactly 7 charecters");
@@ -580,6 +581,23 @@ function uniqueCrnValidation(req,res,next){
         }
       }
     }); 
+}
+
+function qrValidation(req,res,next){
+  var ramdom = req.body.ramdom;
+  var uri = req.body.uri;
+  if(uri == null){
+    req.falsh("error","sorry try again");
+    res.redirect("back");
+  }else if(ramdom == null){
+    req.falsh("error","Don't forget to generate rando code");
+    res.redirect("back");
+  }else if(ramdom.length >3){
+    req.falsh("error","ramdom number can not be grater than 999");
+    res.redirect("back");
+  }else{
+    next();
+  }
 }
 
 app.use(function(req, res) {

@@ -11,6 +11,9 @@
     "express-session": "^1.15.6",
     "morgan": "^1.6.1",
     "open": "0.0.5",
+    "open-new-page": "^1.2.4",
+    "open-new-tab": "0.0.1",
+    "opn": "^5.1.0",
     "parse": "latest"
   },
   "scripts": {
