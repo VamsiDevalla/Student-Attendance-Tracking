@@ -35,6 +35,7 @@ var menuItems = [],
 //setting up local variables for the application.
 app.use(function(req,res,next){
   res.locals.error = req.flash("error");
+  res.locals.warning = req.flash("warning");
   res.locals.success = req.flash("success");
   next();
 });

@@ -22,5 +22,7 @@
 		<div class="alert alert-danger" role="alert"> <%= error %></div>
 	<% } else if(success && success.length>0){ %>
 		<div class="alert alert-success" role="alert"> <%= success %></div>
+	<% } else if(warning && warning.length>0){ %>
+		<div class="alert alert-warning" role="alert"> <%= warning %></div>
 	<% } %>
 </div>

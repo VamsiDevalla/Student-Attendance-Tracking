@@ -23,7 +23,11 @@ router.post("/",function(req,res){
         sess.user=user.get("ID");
         sess.name=user.get("username");
         sess.auth = user.id;
-        req.flash("success","login success");
+        if(user.get("emailVerified")){
+          req.flash("success","login success");
+        }else{
+          req.flash("warning","login success,but don't forget to verify your email");
+        }
         res.redirect("/courses");
       },
       error: function(user, error) {
@@ -52,7 +56,7 @@ router.post("/signup",middleware.signupValidation,function(req,res){
   user.signUp(null, {
     success: function(result) {
       //Hooray! Let them use the app now.
-      req.flash("success","successfully signed up...explore our application");
+      req.flash("success","successfully signed up...don't forget to verify the your email");
       res.redirect("/");   
     },
     error: function(user, error) {
@@ -74,4 +78,22 @@ router.get("/logout", function(req, res) {
   });
 });
 
+router.get("/forgotPassword", function(req, res){
+   res.render("./index/forgotPassword");
+});
+
+router.post("/forgotPassword", function(req, res){
+  Parse.User.requestPasswordReset(req.body.emailID, {
+  success: function() {
+  // Password reset request was sent successfully
+  req.flash("success","Password reset link was emailed to your registered email");
+  res.redirect("/");
+  },
+  error: function(error) {
+    // Show the error message somewhere
+    req.flash("error","email was wrong or not found in our system");
+    res.redirect("back");
+  }
+});
+});
 module.exports = router;
