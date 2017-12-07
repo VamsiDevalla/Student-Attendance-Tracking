@@ -38,10 +38,10 @@ app.use(function(req,res,next){
   res.locals.success = req.flash("success");
   next();
 });
-
+//configuring routes to the app
 app.use(courseRoutes);
 app.use(indexRoutes);
-
+//route to display attendance of a student
 app.get("/courseView/attEdit/:sid/:crn", function(req,res){
   sess = req.session;
   menuItems = [];
@@ -74,7 +74,7 @@ app.get("/courseView/attEdit/:sid/:crn", function(req,res){
     });
   }
 });
-
+//route to edit attendance of a student
 app.get("/attendanceChange/:id", function(req,res){
   sess = req.session;
   var sid;
@@ -119,7 +119,7 @@ app.get("/attendanceChange/:id", function(req,res){
     });
   }
 });
-
+//route open qr geration page
 app.get("/qr", function(req, res) {
   sess = req.session;
   if(!sess.user){
@@ -144,7 +144,7 @@ app.get("/qr", function(req, res) {
     }); 
   }
 });
-
+//route to generate qr
 app.post("/qr",function(req,res){
   sess = req.session;
   if(!sess.user){
@@ -196,7 +196,7 @@ app.post("/qr",function(req,res){
     });
   }
 });
-
+//route to display user account page
 app.get("/myAccount",function(req, res) {
    sess = req.session;
    menuItems = [];
@@ -227,11 +227,11 @@ app.get("/myAccount",function(req, res) {
     
   }
 });
-
+//configuring app to use 404 error page.
 app.use(function(req, res) {
   res.status(404).render("404");
 });
-
+//configuring port numbers for the app.
 app.listen(process.env.PORT || 8081,process.env.IP, function(){
-    console.log("Student attendance app is started");
+  console.log("Student attendance app is started");
 });
