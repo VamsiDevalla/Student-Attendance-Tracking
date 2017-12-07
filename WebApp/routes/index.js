@@ -84,16 +84,16 @@ router.get("/forgotPassword", function(req, res){
 
 router.post("/forgotPassword", function(req, res){
   Parse.User.requestPasswordReset(req.body.emailID, {
-  success: function() {
-  // Password reset request was sent successfully
-  req.flash("success","Password reset link was emailed to your registered email");
-  res.redirect("/");
-  },
-  error: function(error) {
-    // Show the error message somewhere
-    req.flash("error","email was wrong or not found in our system");
-    res.redirect("back");
-  }
-});
+    success: function() {
+    // Password reset request was sent successfully
+    req.flash("success","Password reset link was emailed to your registered email");
+    res.redirect("/");
+    },
+    error: function(error) {
+      // Show the error message somewhere
+      req.flash("error","email was wrong or not found in our system");
+      res.redirect("back");
+    }
+  });
 });
 module.exports = router;
