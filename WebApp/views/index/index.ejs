@@ -1,6 +1,4 @@
-
-
-<% include header %>
+<% include ../partials/header %>
 
 <div class = "container-fluid">
 	<div class = "page-header">
@@ -19,6 +17,8 @@
 				<div class="alert alert-danger" role="alert"> <%= error %></div>
 			<% } else if(success && success.length>0){ %>
 				<div class="alert alert-success" role="alert"> <%= success %></div>
+			<% } else if(warning && warning.length>0){ %>
+				<div class="alert alert-warning" role="alert"> <%= warning %></div>
 			<% } %>
 			
 			<form action = "/" method = "post">
@@ -43,7 +43,7 @@
 						</div>
 						<div class = "col-sm-2"></div>
 					</div>
-					<p style="font-size:100%;,text-align:center">Forgot Password? <a href = "\forgotPassword">click here</a></p>
+					<p style="font-size:100%;,text-align:center">Forgot Password? <a href = "/forgotPassword">click here</a></p>
 				</div>
 			</form>
 		</div>
@@ -55,4 +55,4 @@
 </div>
 
 
-<% include footer %>
+<% include ../partials/footer %>

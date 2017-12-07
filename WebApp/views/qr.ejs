@@ -1,5 +1,5 @@
-<% include header %>
-<% include navBar %>
+<% include ./partials/header %>
+<% include ./partials/navBar %>
 <div class = "container-fluid">
   <div class = "row">
     <div class = "col-sm-3">
@@ -20,28 +20,38 @@
           <div class="form-group">
             <label>Ramdom Code:</label>
             <div class="input-group">
-              <input id="text"  class="form-control" type="Number" name='ramdom' disabled/> 
+              <input id="text"  class="form-control" type="Number" name='ramdom' /> 
               <span class="input-group-addon">
                 <a onclick="randomCode()" class="btn btn-xs btn-info">Generate</a> 
               </span>
             </div> 
           </div>   
-
-          <button style="align:center;text-align:center;" type="button" onclick="generateBarCode()" class="btn btn-primary">Generate QR Code</button>
-          
-          <br>           
-          <div id="qrImage">
-            <img id='barcode' src="https://api.qrserver.com/v1/create-qr-code/?data=HelloWorld&amp;size=100x100" alt="" title="HELLO" width="200" height="200" class="img-responsive center-block"/>       
-          </div> 
           
           <input type="hidden" id="uri"  class="form-control" type="text" name='uri'/>    
-          
-          <button type="submit" class="btn btn-danger"> Submit for attendance</button>
+
+          <div class="row">
+           <div class = "col-sm-3">
+           </div> 
+           <div class = "col-sm-6">
+            <button type="submit" onclick="generateBarCode()" class="btn btn-danger"><span><a id="qruri"></a> </span> Submit for attendance</button>
+           </div> 
+           <div class = "col-sm-3">
+           </div>
+          </div>
         </form>                 
       </div>  
     </div>     
     <div class = "col-sm-3">
+      <div class = "well">
+        <p>* Select the subject for which you want mark attendance</p>
+        <p>* Enter Random number or click generate button to generate random code.</p>
+        <p>* Random Number should be less than or equal to 999.</P>
+        <p>* Click Generate QR to create QR. QR opens in new tab</P>
+        <div class="note">
+          <p>**note: Each QR generated will be considered as one class for the subject. Don't generate two or more QR's in a single class</p>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-<% include footer %>
+<% include ./partials/footer %>

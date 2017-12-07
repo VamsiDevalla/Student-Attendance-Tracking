@@ -1,7 +1,7 @@
 <div class = "navbar navbar-default">
 	<div class ="container-fluid">
 		<ul class = "nav navbar-nav">
-			<li><a href="\welcome">Home</a></li>
+			<li><a href="\courses">Home</a></li>
 			<% if (entries.length) { %>
  				<% entries.forEach(function(entry) { %>
  				<li><a href="/<%= entry.route %>"><%= entry.name %></a></li>
@@ -22,5 +22,7 @@
 		<div class="alert alert-danger" role="alert"> <%= error %></div>
 	<% } else if(success && success.length>0){ %>
 		<div class="alert alert-success" role="alert"> <%= success %></div>
+	<% } else if(warning && warning.length>0){ %>
+		<div class="alert alert-warning" role="alert"> <%= warning %></div>
 	<% } %>
 </div>
