@@ -1,0 +1,50 @@
+<% include ../partials/header %>
+<% include ../partials/navBar %>
+
+<div class = "container-fluid">
+<div class = "row">
+	<div class = "col-sm-3">
+	</div>	
+	<div class = "col-sm-6">
+	 <h4>Add Courses Here</h4>
+		<div class = "jumbotron">
+      <form action="/addCourse" method="post">
+    		<div class="form-group">
+      		<select id="subjects"  name="subject" class="form-control">
+					 <option value="IOS">IOS Development</option>
+					 <option value="Web Apps">Web Applications</option>
+					 <option value="OOPS">Object Oriented Programming</option>
+					 <option value="DB">Database Systems</option>
+					 <option value="ADB">Advanced Databases</option>
+					 <option value="NS">Network security</option>
+           <option value="HCI"> Human Computer Interaction </option>
+					</select>
+    		</div>
+    		<br>
+    		<div class="form-group">
+    			<label>CRN:</label>
+      		<input type="number" for="crn" class="form-control" id="crn" placeholder="Enter CRN" name = "crn">
+    		</div>
+    		<br>
+    		<div class="form-group">
+          <label>Description:</label>
+          <textarea class="form-control" name="des" rows="5" id="description"></textarea>
+        </div>
+        <br>
+    		<div class = "row">
+    			<div class = "col-sm-4"></div>
+    			<div class = "col-sm-4"></div>
+    			<div class = "col-sm-4"><input type="submit" class="btn btn-primary" value = "Add Course" name = "addCourse"></div>
+        </div>
+     </form>
+   </div>
+  </div>
+  <div class="col-md-3">
+    <div class = "well">
+      <p>* Each course should have unique CRN.</p>
+      <p>* CRN must be 5 characters in length.</p>
+      <p>* Description should be minimum 100 characters.</P>
+    </div>
+  </div>
+</div>
+<% include ../partials/footer %>

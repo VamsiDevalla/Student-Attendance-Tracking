@@ -1,0 +1,42 @@
+<% include ./partials/header %>
+<% include ./partials/navBar %>
+
+<div class = "container-fluid">
+	<div class = "row">
+	  <div class = "col-sm-2">
+	  </div>
+	  <div class = "col-sm-8">
+         <h4>Attendance Details :</h4>
+	         <div class = "jumbotron">
+	         	<table class="table table-bordered">
+    				<thead>
+      					<tr>
+	        				<th>Date</th>
+					        <th>Status</th>
+					        <th>Edit</th>
+				        </tr>
+			        </thead>
+				    <tbody>
+				      <% if (att.length) { %>
+					        <% att.forEach(function(entry) { %>
+					          <tr>
+					            <td><%= entry.date %></td>
+					            <td><%= entry.status %></td>
+					            <td> <a class="btn btn-danger" href="/attendanceChange/<%= entry.objId %>">CHANGE</a> </td>
+					          </tr>
+					        <% }); %>
+				      <% }else { %>
+				      		<tr>
+				      			<h4> Course yet to Start!!..come back soon..</h4>
+				      		</tr>
+				      <% } %>
+				    </tbody>
+			 	</table>
+	         </div>
+      </div>
+      <div class = "col-sm-2">
+	  </div>
+	</div>
+</div>
+
+<% include ./partials/footer %>

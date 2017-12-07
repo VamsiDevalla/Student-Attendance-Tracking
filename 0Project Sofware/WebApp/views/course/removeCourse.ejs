@@ -1,0 +1,38 @@
+<% include ../partials/header %>
+<% include ../partials/navBar %>
+
+<div class = "container-fluid">
+	<div class = "row">
+		<div class = "col-sm-4"></div>
+				
+		<div class = "col-sm-4">
+			<h4>Remove Courses Here</h4>
+				
+		    <div class = "jumbotron">
+		        <form action="/removeCourse" method="post">
+				    <div class="form-group">
+		      			<select id="subjects"  name="subject" class="form-control">
+							<% if (courses.length) { %>
+		            			<% courses.forEach(function(entry) { %>
+		           					<option value="<%= entry.title %>-<%= entry.CRN %>"><%= entry.title %>-<%= entry.CRN %></option>
+		           				<% }) %>
+		                    <% } %> 
+						</select>
+		    		</div> 
+		    		<div class = "row">
+		    			<div class = "col-sm-4"></div>
+		    			<div class = "col-sm-4"></div>
+		    			<div class = "col-sm-4">
+		    				<input type="submit" class="btn btn-danger" value = "Remove Course " name = "removeCourse">
+		    			</div>
+		        	</div>
+		        </form>
+
+		    </div>
+       </div>
+
+	   <div class = "col-sm-4"></div>	
+	</div>
+</div>
+
+<% include ../partials/footer %>
