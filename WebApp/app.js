@@ -1,32 +1,35 @@
-var Parse = require('parse/node'),
-    path = require("path"),
-    flash = require("connect-flash");
-var express = require("express");
-var app = express(); 
-var session = require('express-session');
-var logger = require("morgan");
-var bodyParser = require("body-parser");
-var http = require('http').Server(app);
-var appId = "4N5weJdvcHqi3tc1o0ciQjs7s0O2ezOkFmXwQi4h";
-var javakey = "PBJqn5rA4MbrYR7cFZXeQjqUbFBX7ZYu9zRmgAeW";
-Parse.initialize(appId, javakey);
-Parse.serverURL = 'https://parseapi.back4app.com';
-
-app.use( express.static( "public" ) );
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(logger("dev"));
-app.use(flash());
+//importing required packeges:
+var bodyParser = require("body-parser"),
+    appId      = "4N5weJdvcHqi3tc1o0ciQjs7s0O2ezOkFmXwQi4h", //app id of the parse app.
+    javakey    = "PBJqn5rA4MbrYR7cFZXeQjqUbFBX7ZYu9zRmgAeW", //java script key of the parse app.
+    Parse      = require('parse/node'), //importing parse npm pacage
+    path       = require("path"),//importing path npm package to define path for different directories. 
+    flash      = require("connect-flash"),//importing connect-fash npm package for displaying flash messages.
+    express    = require("express"),//importing express framework.
+    app        = express(),//initializing express framework
+    session    = require('express-session'),//importing express-session npm pacage to maintain sessions for the user.
+    logger     = require("morgan"),//importing morgan npm package to log the on going precess in the developer console.
+    http       = require('http').Server(app),//to run app on http server.
+//configuring parse server:    
+Parse.initialize(appId, javakey);// initializing parse server with defined app id and java script key.
+Parse.serverURL = 'https://parseapi.back4app.com';// defining url for the parse server.
+//configuring application:
+app.use( express.static( "public" ) );//configuring app to use folder named public for all static files.
+app.use(bodyParser.urlencoded({ extended: true }));//configuring app use body-parse to parse the request body.
+app.use(logger("dev"));//initializing logger and configuring app to use it.
+app.use(flash());//intializing flash and configuring app to use it.
+//configuring session for the application:
 app.use(session({
-  secret: 'ssshhhhh',
+  secret: 'This is the secret code to encrypt the session', //secret message for the encryption and decryption.
   resave: false,
   saveUninitialized: false
 }));
-app.set("views", path.resolve(__dirname, "views"));
-app.set("view engine", "ejs");
+app.set("views", path.resolve(__dirname, "views")); //setting up default directory for the app to load views.
+app.set("view engine", "ejs");// seeting ejs as default view engine.
 
-var menuItems = [];
-var sess;
-
+var menuItems = [],
+    sess;
+//setting up local variables for the application.
 app.use(function(req,res,next){
   res.locals.error = req.flash("error");
   res.locals.success = req.flash("success");
@@ -39,7 +42,7 @@ app.get("/", function(req, res) {
   res.render("index",{entries : menuItems});
 });
 
-app.get("/welcome", function(req, res) {
+app.get("/courses", function(req, res) {
   sess = req.session;
   menuItems = [{name:"Add Course",route:"addCourse"},{name:"Remove Course",route:"removeCourse"}];
   var cours = [];
@@ -418,9 +421,6 @@ app.post("/qr",function(req,res){
           qr.set("QR", ""+ramdom+course);
           qr.set("uri", uri);
           qr.save();
-          // open(uri);
-          // opn(uri);
-          // window.open(uri,'_blank');
           req.flash("success","QR is generated and opened in new tab.");
           res.redirect("qr");
       }
@@ -485,7 +485,7 @@ app.post("/",function(req,res){
         sess.name=user.get("username");
         sess.auth = user.id;
         req.flash("success","login success");
-        res.redirect("/welcome");
+        res.redirect("/courses");
       },
       error: function(user, error) {
         req.flash("error","username or password or both are invalid");
