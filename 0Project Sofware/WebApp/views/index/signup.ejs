@@ -1,0 +1,140 @@
+<% include ../partials/header %>    
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-9">
+      <form class="well form-horizontal" action="/signup" method="post" >
+        <fieldset>
+          <% if(error && error.length>0){ %>
+            <div class="alert alert-danger" role="alert"> <%= error %></div>
+          <% } else if(success && success.length>0){ %>
+            <div class="alert alert-success" role="alert"> <%= success %></div>
+          <% } else if(warning && warning.length>0){ %>
+           <div class="alert alert-warning" role="alert"> <%= warning %></div>
+         <% } %>
+          <!-- Form Name -->
+          <legend><center><h2><b>Registration Form</b></h2></center></legend><br>
+
+          <!-- Text input-->
+
+          <div class="form-group">
+            <label class="col-md-4 control-label">First Name</label>  
+            <div class="col-md-4 inputGroupContainer">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                <input  name="first_name" placeholder="First Name" class="form-control"  type="text" minlength="5" maxlength="20">
+              </div>
+            </div>
+          </div>
+
+          <!-- Text input-->
+
+          <div class="form-group">
+            <label class="col-md-4 control-label" >Last Name</label> 
+            <div class="col-md-4 inputGroupContainer">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                <input name="last_name" placeholder="Last Name" class="form-control"  type="text" minlength="5" maxlength="20">
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-md-4 control-label" >ID</label> 
+              <div class="col-md-4 inputGroupContainer">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-paperclip"></i></span>
+                <input name="college_id" placeholder="College Id" class="form-control"  type="text" minlength="7" maxlength="7">
+              </div>
+            </div>
+          </div>
+            
+          <!-- Text input-->
+
+          <div class="form-group">
+            <label class="col-md-4 control-label">Username</label>  
+            <div class="col-md-4 inputGroupContainer">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+              <input  name="user_name" placeholder="Username" class="form-control"  type="text" minlength="5" maxlength="20">
+              </div>
+            </div>
+          </div>
+
+          <!-- Text input-->
+
+          <div class="form-group">
+            <label class="col-md-4 control-label" >Password</label> 
+              <div class="col-md-4 inputGroupContainer">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                <input name="user_password" placeholder="Password" class="form-control"  type="password" minlength="5" maxlength="20">
+              </div>
+            </div>
+          </div>
+
+          <!-- Text input-->
+
+          <div class="form-group">
+            <label class="col-md-4 control-label" >Confirm Password</label> 
+              <div class="col-md-4 inputGroupContainer">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                <input name="confirm_password" placeholder="Confirm Password" class="form-control"  type="password">
+              </div>
+            </div>
+          </div>
+
+          <!-- Text input-->
+                 <div class="form-group">
+            <label class="col-md-4 control-label">E-Mail</label>  
+              <div class="col-md-4 inputGroupContainer">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                <input name="email" placeholder="E-Mail Address" class="form-control"  type="email">
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Text input-->
+                 
+          <div class="form-group">
+            <label class="col-md-4 control-label">Contact No.</label>  
+              <div class="col-md-4 inputGroupContainer">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+                <input name="contact_no" placeholder="(639)-540-0490" class="form-control" type="number">
+              </div>
+            </div>
+          </div>
+
+          <!-- Select Basic -->
+
+          <!-- Button -->
+          <div class="form-group">
+            <label class="col-md-4 control-label"></label>
+            <div class="col-md-4"><br>
+              <button type="submit" class="btn btn-warning">SUBMIT <span class="glyphicon glyphicon-send"></span></button> 
+              <a class="btn btn-danger" href="/">CANCEL<span class="glyphicon glyphicon-remove-circle"></span></a>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+    <div class="col-md-3">
+      <div class = "well">
+        <p>* firstname should be between 5 to 20 characters.</p>
+        <p>* lastname should be between 5 to 20 characters.</p>
+        <p>* ID should have a length of 7 characters.</p>
+        <p>* Username should be between 5 to 20 characters.</p>
+        <p>* Password should be between 5 to 20 characters.</p>
+        <p>* Confirm Password should match with the password.</p>
+        <p>* Email should be in "xyz@gmail.com" format</P>
+        <p>* contact number should be in "(639)-540-0490" format</P>
+      </div>
+    </div>
+  </div>
+</div><!-- /.container -->
+
+<% include ../partials/footer %>

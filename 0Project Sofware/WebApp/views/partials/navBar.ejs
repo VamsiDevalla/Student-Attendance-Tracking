@@ -1,0 +1,28 @@
+<div class = "navbar navbar-default">
+	<div class ="container-fluid">
+		<ul class = "nav navbar-nav">
+			<li><a href="\courses">Home</a></li>
+			<% if (entries.length) { %>
+ 				<% entries.forEach(function(entry) { %>
+ 				<li><a href="/<%= entry.route %>"><%= entry.name %></a></li>
+ 				<% }) %>
+			<% } %>
+		</ul>
+		<ul class = "nav navbar-nav navbar-right">
+			<li><a href="\qr"><span class="glyphicon glyphicon-qrcode"></span> QR</a></li>
+			<li><a href="\myAccount"><span class="glyphicon glyphicon-user"></span> My Account</a></li>
+			<li><a href="\logout"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
+
+		</ul>
+	</div>
+</div>
+
+<div class = "container" > 
+	<% if(error && error.length>0){ %>
+		<div class="alert alert-danger" role="alert"> <%= error %></div>
+	<% } else if(success && success.length>0){ %>
+		<div class="alert alert-success" role="alert"> <%= success %></div>
+	<% } else if(warning && warning.length>0){ %>
+		<div class="alert alert-warning" role="alert"> <%= warning %></div>
+	<% } %>
+</div>
